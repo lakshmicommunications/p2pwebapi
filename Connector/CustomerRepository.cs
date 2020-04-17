@@ -25,11 +25,10 @@ namespace p2p_web_api.Connector
             {
                 using (MySqlCommand mySqlCommand = sqlConnection.CreateCommand())
                 {
-                    //  mySqlCommand.CommandText = "SELECT *FROM tbl_customer WHERE fld_email= '" +/*DataSecurity.Encrypt*/(customerloginRequestModel.customerEmail.Trim())+ "'" + "AND fld_password='" +/*DataSecurity.Encrypt*/(customerloginRequestModel.customerPassword.Trim()) + "'";
-                    //  mySqlCommand.CommandText = "SELECT *FROM tbl_customer";
+                  
                     try
                     {
-                        mySqlCommand.CommandText = "SELECT fld_id as fld_id," +
+                       mySqlCommand.CommandText = "SELECT fld_id as fld_id," +
                        "AES_DECRYPT(fld_firstname,'P@PDoctor')as fld_firstname," +
                        "AES_DECRYPT(fld_lastname,'P@PDoctor')as fld_lastname,  " +
                        "AES_DECRYPT(fld_phonenumber,'P@PDoctor')as fld_phonenumber," +
@@ -49,8 +48,14 @@ namespace p2p_web_api.Connector
                        "AES_DECRYPT(fld_dob,'P@PDoctor')as fld_dob,  " +
                        "AES_DECRYPT(fld_timezone,'P@PDoctor')as fld_timezone,  " +
                        "AES_DECRYPT(fld_phn_number,'P@PDoctor')as fld_phn_number,  " +
+<<<<<<< HEAD
                        "AES_DECRYPT(fld_gender,'P@PDoctor')as fld_gender FROM tbl_customer WHERE fld_email='"+customerloginRequestModel.customerEmail.Trim()+ "'" + " AND fld_password='"+customerloginRequestModel.customerPassword.Trim()+"'";
                         mySqlCommand.CommandText = "SELECT *FROM tbl_customer WHERE fld_email= '" +/*DataSecurity.Encrypt*/(customerloginRequestModel.customerEmail.Trim()) + "'" + "AND fld_password='" +/*DataSecurity.Encrypt*/(customerloginRequestModel.customerPassword.Trim()) + "'";
+=======
+                       "AES_DECRYPT(fld_gender,'P@PDoctor')as fld_gender FROM tbl_customer WHERE fld_email="+"AES_ENCRYPT('"+ customerloginRequestModel.customerEmail.Trim()+"'"+","+"'"+ "P@PDoctor"+"'"+")"+ " AND fld_password=" + "AES_ENCRYPT('"+ customerloginRequestModel.customerPassword.Trim() + "'" + "," + "'" + "P@PDoctor" + "'" + ")" + "";
+
+                     
+>>>>>>> 3cebcd513dda701af51af69ab1b953061cdd7ddf
                         mySqlCommand.CommandType = System.Data.CommandType.Text;
                         mySqlCommand.Connection = sqlConnection;
                         sqlConnection.Open();
