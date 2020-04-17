@@ -50,6 +50,7 @@ namespace p2p_web_api.Connector
                        "AES_DECRYPT(fld_timezone,'P@PDoctor')as fld_timezone,  " +
                        "AES_DECRYPT(fld_phn_number,'P@PDoctor')as fld_phn_number,  " +
                        "AES_DECRYPT(fld_gender,'P@PDoctor')as fld_gender FROM tbl_customer WHERE fld_email='"+customerloginRequestModel.customerEmail.Trim()+ "'" + " AND fld_password='"+customerloginRequestModel.customerPassword.Trim()+"'";
+                        mySqlCommand.CommandText = "SELECT *FROM tbl_customer WHERE fld_email= '" +/*DataSecurity.Encrypt*/(customerloginRequestModel.customerEmail.Trim()) + "'" + "AND fld_password='" +/*DataSecurity.Encrypt*/(customerloginRequestModel.customerPassword.Trim()) + "'";
                         mySqlCommand.CommandType = System.Data.CommandType.Text;
                         mySqlCommand.Connection = sqlConnection;
                         sqlConnection.Open();
